@@ -8,7 +8,7 @@ import {
   pageSettingsReadKeys,
   settingsAssetBucket
 } from '$lib/server/settings';
-import { supabaseAdmin } from '$lib/server/supabase';
+import { getSupabaseAdmin } from '$lib/server/supabase';
 import { type AdminDashboardData, type PublicCatalog } from '$lib/types';
 
 export const getPublicCatalog = async (): Promise<PublicCatalog> => {
@@ -40,14 +40,14 @@ export const resetDatabase = async () => {
   const settings = await listSettings(pageSettingsReadKeys);
   const assetPaths = [settings[pageSettingsKeys.avatarPath], settings[pageSettingsKeys.backgroundPath]].filter(Boolean);
 
-  const { error } = await supabaseAdmin.rpc('reset_admin_data', { p_settings: pageSettingsDefaults });
+  const { error } = await getSupabaseAdmin().rpc('reset_admin_data', { p_settings: pageSettingsDefaults });
 
   if (error) {
     throw error;
   }
 
   if (assetPaths.length > 0) {
-    const { error: assetsError } = await supabaseAdmin.storage.from(settingsAssetBucket).remove(assetPaths);
+    const { error: assetsError } = await getSupabaseAdmin().storage.from(settingsAssetBucket).remove(assetPaths);
 
     if (assetsError) {
       throw assetsError;

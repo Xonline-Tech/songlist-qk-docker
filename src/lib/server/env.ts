@@ -10,9 +10,17 @@ const requireEnv = (value: string | undefined, name: string) => {
 };
 
 export const supabaseConfig = {
-  url: requireEnv(publicEnv.PUBLIC_SUPABASE_URL, 'PUBLIC_SUPABASE_URL'),
-  publishableKey: requireEnv(publicEnv.PUBLIC_SUPABASE_PUBLISHABLE_KEY, 'PUBLIC_SUPABASE_PUBLISHABLE_KEY'),
-  secretKey: requireEnv(privateEnv.SUPABASE_SECRET_KEY, 'SUPABASE_SECRET_KEY')
+  get url() {
+    return requireEnv(publicEnv.PUBLIC_SUPABASE_URL, 'PUBLIC_SUPABASE_URL');
+  },
+  get publishableKey() {
+    return requireEnv(publicEnv.PUBLIC_SUPABASE_PUBLISHABLE_KEY, 'PUBLIC_SUPABASE_PUBLISHABLE_KEY');
+  },
+  get secretKey() {
+    return requireEnv(privateEnv.SUPABASE_SECRET_KEY, 'SUPABASE_SECRET_KEY');
+  }
 };
 
-export const authSecret = requireEnv(privateEnv.AUTH_SECRET, 'AUTH_SECRET');
+export function getAuthSecret() {
+  return requireEnv(privateEnv.AUTH_SECRET, 'AUTH_SECRET');
+}
