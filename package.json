@@ -12,7 +12,8 @@
     "db:types": "node scripts/generate-supabase-types.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "start": "node --env-file=.env build"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^7.0.1",
@@ -35,6 +36,7 @@
   "dependencies": {
     "@neteasecloudmusicapienhanced/api": "^4.32.0",
     "@supabase/supabase-js": "^2.104.0",
+    "@sveltejs/adapter-node": "^5.5.4",
     "bits-ui": "^2.18.0",
     "svelte-sonner": "^1.1.0",
     "zod": "^4.3.6",
