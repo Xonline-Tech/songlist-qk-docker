@@ -6,3 +6,7 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    # SvelteKit 默认 body 大小限制为 512KB，上传大资源时需调大此值
+    # 取消注释并修改数值以解除限制，例如 10MB（单位：字节）
+    # environment:
+    #   - BODY_SIZE_LIMIT=10485760

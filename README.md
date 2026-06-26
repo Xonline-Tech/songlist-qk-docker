@@ -84,6 +84,8 @@ services:
       - AUTH_SECRET=your-random-secret
 ```
 
+> **关于文件上传**：SvelteKit adapter-node 默认 body 大小限制为 **512KB**。如需上传较大资源（如歌曲文件、图片等），通过环境变量 `BODY_SIZE_LIMIT` 调整，单位为字节。例如 10MB：`-e BODY_SIZE_LIMIT=10485760` 或在 docker-compose 中添加 `- BODY_SIZE_LIMIT=10485760`。
+
 ### 自行构建镜像
 
 项目自带多阶段 Dockerfile，构建时无需提供环境变量：
